@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
 
 import { useEditorContext } from '../editor';
-import { CloseIcon, PenIcon, StarFilledIcon, StarIcon } from '../icons';
+import { CloseIcon, HistoryIcon, PenIcon, StarFilledIcon, StarIcon } from '../icons';
 import { Tooltip, UnStyledButton } from '../ui';
 import { useHistoryContext } from './context';
 
@@ -14,7 +14,10 @@ export function History() {
   const reversedItems = items.slice().reverse();
   return (
     <section aria-label="History" className="graphiql-history">
-      <div className="graphiql-history-header">History</div>
+      <div className="graphiql-history-header">
+        <HistoryIcon />
+        <span>History</span>
+      </div>
       <ul className="graphiql-history-items">
         {reversedItems.map((item, i) => {
           return (

@@ -1,7 +1,7 @@
 import { isType } from 'graphql';
 import { ReactNode } from 'react';
 
-import { ChevronLeftIcon } from '../../icons';
+import {ChevronLeftIcon, DocsIcon} from '../../icons';
 import { useSchemaContext } from '../../schema';
 import { Spinner } from '../../ui';
 import { useExplorerContext } from '../context';
@@ -79,7 +79,10 @@ export function DocExplorer() {
               {prevName}
             </a>
           )}
-          <div className="graphiql-doc-explorer-title">{navItem.name}</div>
+          <div className="graphiql-doc-explorer-title-wrapper">
+            <DocsIcon />
+            <div className="graphiql-doc-explorer-title">{navItem.name}</div>
+          </div>
         </div>
         <div className="graphiql-doc-explorer-search">
           <Search key={navItem.name} />

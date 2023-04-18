@@ -1,11 +1,33 @@
 /* Everything */
 .graphiql-container {
-  background-color: hsl(var(--color-base));
+  background-color: rgba(9, 2, 24, 0.5);
   display: flex;
   height: 100%;
   margin: 0;
   overflow: hidden;
   width: 100%;
+}
+
+.root {
+  background: url("graphiql/resources/mainBg.svg") no-repeat 70% 45%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #090218;
+  z-index: -1;
 }
 
 /* The sidebar */
@@ -15,6 +37,10 @@
   justify-content: space-between;
   padding: var(--px-8);
   width: var(--sidebar-width);
+}
+
+.graphiql-container .sidebar-left {
+  justify-content: flex-end;
 }
 
 .graphiql-container .graphiql-sidebar .graphiql-sidebar-section {
@@ -39,8 +65,8 @@
   margin-top: var(--px-4);
 }
 .graphiql-container .graphiql-sidebar button > svg {
-  height: var(--px-20);
-  width: var(--px-20);
+  height: 40px;
+  width: 40px;
 }
 
 /* The main content, i.e. everything except the sidebar */
@@ -52,7 +78,7 @@
 
 /* The current session and tabs */
 .graphiql-container .graphiql-sessions {
-  background-color: hsla(var(--color-neutral), var(--alpha-background-light));
+  background-color: transparent;
   /* Adding the 8px of padding to the inner border radius of the query editor */
   border-radius: calc(var(--border-radius-12) + var(--px-8));
   display: flex;
@@ -62,6 +88,7 @@
   margin: var(--px-16);
   margin-left: 0;
   min-width: 0;
+  box-shadow: -10px 5px 15px rgba(89, 91, 212, 0.2), 10px 5px 15px rgba(89, 91, 212, 0.2);
 }
 
 /* The session header containing tabs and the logo */
@@ -70,6 +97,98 @@
   display: flex;
   justify-content: space-between;
   height: var(--session-header-height);
+}
+
+.graphiql-session-header .graphiql-tabs::-webkit-scrollbar {
+  height: 5px;
+  background-color: #090218;
+}
+
+.graphiql-session-header .graphiql-tabs::-webkit-scrollbar-thumb {
+  background-color: #332b52;
+}
+
+/*.graphiql-sessions .graphiql-header-banner {*/
+.graphiql-header {
+  width: 100%;
+  height: 130px;
+  font-size: 40px;
+  z-index: 999;
+  padding: 20px;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+}
+
+.graphiql-header-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-logo {
+  display: block;
+  width: 84px;
+  height: 40px;
+}
+
+.graphiql-header-subtitle {
+  font-family: 'Source Sans Pro', 'sans-serif';
+  font-size: 16px;
+  color: #C0BACF;
+}
+
+.graphiql-header-banner {
+  width: 40%;
+  height: 90px;
+  background: linear-gradient(93.48deg, rgba(14, 6, 32, 0.8) 23.19%, rgba(21, 12, 48, 0.8) 68.8%),
+  linear-gradient(0deg, #272138, #272138);
+  border: 1px solid #272138;
+  border-radius: 22px;
+  margin-right: 40px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Source Sans Pro', 'sans-serif';
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+}
+
+.banner-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-item-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 8px;
+}
+
+.banner-button {
+  padding: 10px 24px;
+  background: rgba(89, 91, 213, 0.44);
+  border: 1px solid rgba(92, 93, 220, 0.5);
+  border-radius: 14px;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1680px) {
+  .graphiql-header-banner {
+    font-size: 14px;
+    height: 70px;
+  }
+  .banner-item-image {
+    width: 40px;
+    height: 40px;
+  }
+  .banner-button {
+    padding: 10px 18px;
+  }
 }
 
 /* The button to add a new tab */
@@ -112,11 +231,12 @@ button.graphiql-tab-add > svg {
   display: flex;
   flex: 1;
   padding: 0 var(--px-8) var(--px-8);
+  margin-top: 10px;
 }
 
 /* All editors (query, variable, headers) */
 .graphiql-container .graphiql-editors {
-  background-color: hsl(var(--color-base));
+  background-color: #0F0822;
   border-radius: calc(var(--border-radius-12));
   box-shadow: var(--popover-box-shadow);
   display: flex;
@@ -139,7 +259,51 @@ button.graphiql-tab-add > svg {
 /* The query editor */
 .graphiql-container .graphiql-query-editor-wrapper {
   display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.graphiql-query-editor-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  margin-top: 15px;
+}
+
+.graphiql-query-editor-header-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.graphiql-query-editor-header-title span {
+  margin-left: 10px;
+}
+
+.graphiql-query-editor-header-controls {
+  display: flex;
+  align-items: center;
+}
+
+.header-controls-dropdown {
+  margin-right: 20px;
+  width: 85px;
+}
+
+.header-controls-dropdown select {
+  font-family: 'Source Sans Pro', 'sans-serif';
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  padding: 5px;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
 /* The vertical toolbar next to the query editor */
@@ -155,8 +319,8 @@ button.graphiql-tab-add > svg {
 .graphiql-toolbar-icon {
   color: hsla(var(--color-neutral), var(--alpha-tertiary));
   display: block;
-  height: calc(var(--toolbar-width) - (var(--px-8) * 2));
-  width: calc(var(--toolbar-width) - (var(--px-8) * 2));
+  height: 30px;
+  width: 30px;
 }
 
 /* The tab bar for editor tools */
@@ -180,7 +344,7 @@ button.graphiql-tab-add > svg {
   display: flex;
 }
 .graphiql-container .graphiql-editor-tools-tabs > button {
-  padding: var(--px-8) var(--px-12);
+  padding: var(--px-4) var(--px-8);
 }
 .graphiql-container .graphiql-editor-tools-tabs > button + button {
   margin-left: var(--px-8);
@@ -206,11 +370,41 @@ button.graphiql-tab-add > svg {
 
 /* The response view */
 .graphiql-container .graphiql-response {
-  --editor-background: transparent;
+  background-color: #0F0822;
+  border-radius: calc(var(--border-radius-12));
+  box-shadow: var(--popover-box-shadow);
   display: flex;
   flex: 1;
   flex-direction: column;
   position: relative;
+}
+
+.graphiql-response-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto !important;
+  border-radius: calc(var(--border-radius-12));
+}
+
+.active {
+  outline: #595BD4 solid 2px;
+}
+
+.graphiql-response-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  margin-top: 15px;
+}
+
+.graphiql-response-header > span {
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  margin-left: 10px;
 }
 
 /* The results editor wrapping container */
@@ -220,18 +414,54 @@ button.graphiql-tab-add > svg {
 }
 
 /* The footer below the response view */
-.graphiql-container .graphiql-footer {
-  border-top: 1px solid
-    hsla(var(--color-neutral), var(--alpha-background-heavy));
+.root .graphiql-footer {
+  width: 100%;
+  height: 40px;
+  background: radial-gradient(278.12% 1089.85% at 50% 50%, #090218 0%, #0B051D 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: rgba(154, 151, 174, 1);
+  margin-top: 70px;
+  padding: 20px;
+  font-size: 14px;
+}
+.graphiql-footer .footer-madeBy {
+  margin-right: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.graphiql-footer .footer-policy a {
+  color: #9A97AE;
+}
+
+.graphiql-footer .footer-socials {
+  margin-right: 40px;
+  display: flex;
+  align-items: flex-end;
 }
 
 /* The plugin container */
 .graphiql-container .graphiql-plugin {
+  height: 60vh;
+  background-color: #0F0822;
+  border-radius: calc(var(--border-radius-12));
+  box-shadow: var(--popover-box-shadow);
   border-left: 1px solid
     hsla(var(--color-neutral), var(--alpha-background-heavy));
   flex: 1;
   overflow-y: auto;
-  padding: var(--px-16);
+  padding: 15px;
+}
+
+.graphiql-container .graphiql-plugin::-webkit-scrollbar {
+  background-color: #0F0822;
+  width: 5px;
+}
+
+.graphiql-container .graphiql-plugin::-webkit-scrollbar-thumb {
+  background-color: #332b52;
 }
 
 /* Generic drag bar for horizontal resizing */

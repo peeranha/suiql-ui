@@ -91,7 +91,7 @@ function getSchemaUrl() {
 // how you can customize GraphiQL by providing different values or
 // additional child elements.
 ReactDOM.render(
-  React.createElement(GraphiQL, {
+  React.createElement(GraphiQL.GraphiQLWithExplorer, {
     fetcher: GraphiQL.createFetcher({
       url: getSchemaUrl(),
       subscriptionUrl: 'ws://localhost:8081/subscriptions',
@@ -104,7 +104,7 @@ ReactDOM.render(
     onEditVariables,
     onEditHeaders,
     defaultEditorToolsVisibility: true,
-    isHeadersEditorEnabled: true,
+    isHeadersEditorEnabled: false,
     shouldPersistHeaders: true,
     inputValueDeprecation: GraphQLVersion.includes('15.5') ? undefined : true,
     onTabChange,

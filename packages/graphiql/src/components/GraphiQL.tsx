@@ -9,6 +9,7 @@ import React, {
   ComponentType,
   PropsWithChildren,
   ReactNode,
+  useEffect,
   useState,
 } from 'react';
 
@@ -54,6 +55,15 @@ import {
   VariableEditor,
   WriteableEditorProps,
 } from '@graphiql/react';
+
+import headerLogo from 'graphiql/resources/header-logo.svg';
+import graphApiImg from './images/graphApi.png';
+import realtimeNotificationsImg from './images/realtimeNotifications.png';
+import fastNodeImg from './images/fastNode.png';
+import heartImg from './images/heart.svg';
+import peeranhaImg from './images/peeranha.svg';
+import discordImg from './images/discord.svg';
+import editorIcon from './images/editorIcon.svg';
 
 const majorVersion = parseInt(React.version.slice(0, 2), 10);
 
@@ -217,11 +227,16 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
   const storageContext = useStorageContext();
   const pluginContext = usePluginContext();
 
+  const [focusedEditor, setFocusedEditor] = useState('');
+
   const copy = useCopyQuery({ onCopyQuery: props.onCopyQuery });
   const merge = useMergeQuery();
   const prettify = usePrettifyEditors();
 
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
+  useEffect(() => {
+    setTheme('dark');
+  }, [setTheme])
 
   const PluginContent = pluginContext?.visiblePlugin?.content;
 
@@ -241,6 +256,11 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
     direction: 'horizontal',
     storageKey: 'editorFlex',
   });
+  const editorPluginResize = useDragResize({
+    direction: 'horizontal',
+    storageKey: 'editorPluginFlex',
+    initiallyHidden: 'second',
+  })
   const editorToolsResize = useDragResize({
     defaultSizeRelation: 3,
     direction: 'vertical',
@@ -288,10 +308,6 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
 
   const children = React.Children.toArray(props.children);
 
-  const logo = children.find(child =>
-    isChildComponentType(child, GraphiQL.Logo),
-  ) || <GraphiQL.Logo />;
-
   const toolbar = children.find(child =>
     isChildComponentType(child, GraphiQL.Toolbar),
   ) || (
@@ -333,42 +349,47 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
     );
 
   return (
-    <div data-testid="graphiql-container" className="graphiql-container">
-      <div className="graphiql-sidebar">
-        <div className="graphiql-sidebar-section">
-          {pluginContext?.plugins.map(plugin => {
-            const isVisible = plugin === pluginContext.visiblePlugin;
-            const label = `${isVisible ? 'Hide' : 'Show'} ${plugin.title}`;
-            const Icon = plugin.icon;
-            return (
-              <Tooltip key={plugin.title} label={label}>
-                <UnStyledButton
-                  type="button"
-                  className={isVisible ? 'active' : ''}
-                  onClick={() => {
-                    if (isVisible) {
-                      pluginContext.setVisiblePlugin(null);
-                      pluginResize.setHiddenElement('first');
-                    } else {
-                      pluginContext.setVisiblePlugin(plugin);
-                      pluginResize.setHiddenElement(null);
-                    }
-                  }}
-                  aria-label={label}
-                >
-                  <Icon aria-hidden="true" />
-                </UnStyledButton>
-              </Tooltip>
-            );
-          })}
+    <div data-testid="root" className="root">
+      <div className="graphiql-header">
+        <div className="graphiql-header-logo">
+          <img src={headerLogo} alt="logo" className="header-logo"/>
+          <span className="graphiql-header-subtitle">Query Sui blockchain with GraphQL</span>
         </div>
+        <div className="graphiql-header-banner">
+          <div className="banner-item">
+            <img className="banner-item-image" src={graphApiImg} alt="graphApiImg"/>
+            <span className="banner-item-text">GraphQL <br/>API</span>
+          </div>
+          <div className="banner-item">
+            <img className="banner-item-image" src={realtimeNotificationsImg} alt="graphApiImg"/>
+            <span className="banner-item-text">Realtime <br/>Notifications API</span>
+          </div>
+          <div className="banner-item">
+            <img className="banner-item-image" src={fastNodeImg} alt="graphApiImg"/>
+            <span className="banner-item-text">Blazing fast <br/>node RPC API</span>
+          </div>
+          <a
+              className="banner-button"
+              href="https://airtable.com/shrHneWjS3ijJ8kHY"
+              target="_blank"
+              onClick={() => {
+                // @ts-expect-error
+                window.dataLayer.push({ 'event': 'getAccess' })
+              }}
+          >
+            Get Early Access
+          </a>
+        </div>
+      </div>
+      <div data-testid="graphiql-container" className="graphiql-container">
+      <div className="graphiql-sidebar sidebar-left">
         <div className="graphiql-sidebar-section">
-          <Tooltip label="Re-fetch GraphQL schema">
+          <Tooltip label="Re-fetch SuiQL schema">
             <UnStyledButton
               type="button"
               disabled={schemaContext.isFetching}
               onClick={() => schemaContext.introspect()}
-              aria-label="Re-fetch GraphQL schema"
+              aria-label="Re-fetch SuiQL schema"
             >
               <ReloadIcon
                 className={schemaContext.isFetching ? 'graphiql-spin' : ''}
@@ -397,28 +418,10 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
         </div>
       </div>
       <div className="graphiql-main">
-        <div
-          ref={pluginResize.firstRef}
-          style={{
-            // Make sure the container shrinks when containing long
-            // non-breaking texts
-            minWidth: '200px',
-          }}
-        >
-          <div className="graphiql-plugin">
-            {PluginContent ? <PluginContent /> : null}
-          </div>
-        </div>
-        <div ref={pluginResize.dragBarRef}>
-          {pluginContext?.visiblePlugin ? (
-            <div className="graphiql-horizontal-drag-bar" />
-          ) : null}
-        </div>
         <div ref={pluginResize.secondRef} style={{ minWidth: 0 }}>
           <div className="graphiql-sessions">
             <div className="graphiql-session-header">
               <Tabs aria-label="Select active operation">
-                {editorContext.tabs.length > 1 ? (
                   <>
                     {editorContext.tabs.map((tab, index) => (
                       <Tab
@@ -440,6 +443,9 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                             if (editorContext.activeTabIndex === index) {
                               executionContext.stop();
                             }
+                            if (editorContext.tabs.length === 1) {
+                              editorContext.addTab()
+                            }
                             editorContext.closeTab(index);
                           }}
                         />
@@ -458,25 +464,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                       </Tooltip>
                     </div>
                   </>
-                ) : null}
               </Tabs>
-              <div className="graphiql-session-header-right">
-                {editorContext.tabs.length === 1 ? (
-                  <div className="graphiql-add-tab-wrapper">
-                    <Tooltip label="Add tab">
-                      <UnStyledButton
-                        type="button"
-                        className="graphiql-tab-add"
-                        onClick={() => editorContext.addTab()}
-                        aria-label="Add tab"
-                      >
-                        <PlusIcon aria-hidden="true" />
-                      </UnStyledButton>
-                    </Tooltip>
-                  </div>
-                ) : null}
-                {logo}
-              </div>
             </div>
             <div
               role="tabpanel"
@@ -486,11 +474,27 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
             >
               <div ref={editorResize.firstRef}>
                 <div
-                  className={`graphiql-editors${
-                    editorContext.tabs.length === 1 ? ' full-height' : ''
-                  }`}
+                    className={`graphiql-editors ${focusedEditor === 'query' ? 'active' : ''}`}
+                    tabIndex={0}
+                    onFocus={() => setFocusedEditor('query')}
+                    onBlur={() => setFocusedEditor('')}
                 >
                   <div ref={editorToolsResize.firstRef}>
+                    <div className="graphiql-query-editor-header">
+                      <div className="graphiql-query-editor-header-title">
+                        <img src={editorIcon} alt="editorIcon"/>
+                        <span>Query</span>
+                      </div>
+                      <div className="graphiql-query-editor-header-controls">
+                        <div className="header-controls-dropdown">
+                          <select name="network-select" placeholder="Network">
+                            <option value="testnet" defaultChecked>Testnet</option>
+                            <option value="mainnet">Mainnet</option>
+                          </select>
+                        </div>
+                        <ExecuteButton />
+                      </div>
+                    </div>
                     <section
                       className="graphiql-query-editor"
                       aria-label="Query Editor"
@@ -510,7 +514,6 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                         role="toolbar"
                         aria-label="Editor Commands"
                       >
-                        <ExecuteButton />
                         {toolbar}
                       </div>
                     </section>
@@ -628,18 +631,97 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                 <div className="graphiql-horizontal-drag-bar" />
               </div>
               <div ref={editorResize.secondRef}>
-                <div className="graphiql-response">
-                  {executionContext.isFetching ? <Spinner /> : null}
-                  <ResponseEditor
-                    editorTheme={props.editorTheme}
-                    responseTooltip={props.responseTooltip}
-                    keyMap={props.keyMap}
-                  />
-                  {footer}
+                <div ref={editorPluginResize.firstRef}>
+                  <div
+                      className={`graphiql-response ${focusedEditor === 'response' ? 'active' : ''}`}
+                      tabIndex={0}
+                      onFocus={() => setFocusedEditor('response')}
+                      onBlur={() => setFocusedEditor('')}
+                  >
+                    <div className="graphiql-response-wrapper">
+                      <div className="graphiql-response-header">
+                        <img src={editorIcon} alt="editorIcon"/>
+                        <span>Result</span>
+                      </div>
+                      {executionContext.isFetching ? <Spinner /> : null}
+                      <ResponseEditor
+                          editorTheme={props.editorTheme}
+                          responseTooltip={props.responseTooltip}
+                          keyMap={props.keyMap}
+                      />
+                      {footer}
+                    </div>
+                  </div>
+                </div>
+                <div ref={editorPluginResize.dragBarRef}>
+                  <div className="graphiql-horizontal-drag-bar" />
+                </div>
+                <div
+                    ref={editorPluginResize.secondRef}
+                    style={{
+                      // Make sure the container shrinks when containing long
+                      // non-breaking texts
+                      minWidth: '200px',
+                    }}
+                >
+                  <div
+                      className={`graphiql-plugin ${focusedEditor === 'plugin' ? 'active' : ''}`}
+                      tabIndex={0}
+                      onFocus={() => setFocusedEditor('plugin')}
+                      onBlur={() => setFocusedEditor('')}
+                  >
+                    {PluginContent ? <PluginContent /> : null}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+        <div className="graphiql-sidebar">
+          <div className="graphiql-sidebar-section">
+            {pluginContext?.plugins.map(plugin => {
+              const isVisible = plugin === pluginContext.visiblePlugin;
+              const label = `${isVisible ? 'Hide' : 'Show'} ${plugin.title}`;
+              const Icon = plugin.icon;
+              return (
+                  <Tooltip key={plugin.title} label={label}>
+                    <UnStyledButton
+                        type="button"
+                        className={isVisible ? 'active' : ''}
+                        onClick={() => {
+                          if (isVisible) {
+                            pluginContext.setVisiblePlugin(null);
+                            editorPluginResize.setHiddenElement('second');
+                          } else {
+                            pluginContext.setVisiblePlugin(plugin);
+                            editorPluginResize.setHiddenElement(null);
+                          }
+                        }}
+                        aria-label={label}
+                    >
+                      <Icon aria-hidden="true" />
+                    </UnStyledButton>
+                  </Tooltip>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="graphiql-footer">
+        <span className="footer-policy">
+          © 2023 SuiQL This site is protected by reCAPTCHA<br/>
+          and the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy </a>
+          and <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
+        </span>
+        <div className="footer-madeBy">
+          <span>Made with &nbsp;</span>
+          <img src={heartImg} alt="heartImg"/>
+          <span>&nbsp;by&nbsp;</span>
+          <a href="https://peeranha.io" target="_blank"><img src={peeranhaImg} alt="peeranhaImg"/></a>
+        </div>
+        <div className="footer-socials">
+          <a href="https://discord.gg/jmrbqVnzMZ" target="_blank"><img src={discordImg} alt="discordImg"/></a>
         </div>
       </div>
       <Dialog
@@ -798,39 +880,6 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
             </ButtonGroup>
           </div>
         ) : null}
-        <div className="graphiql-dialog-section">
-          <div>
-            <div className="graphiql-dialog-section-title">Theme</div>
-            <div className="graphiql-dialog-section-caption">
-              Adjust how the interface looks like.
-            </div>
-          </div>
-          <div>
-            <ButtonGroup>
-              <Button
-                type="button"
-                className={theme === null ? 'active' : ''}
-                onClick={() => setTheme(null)}
-              >
-                System
-              </Button>
-              <Button
-                type="button"
-                className={theme === 'light' ? 'active' : ''}
-                onClick={() => setTheme('light')}
-              >
-                Light
-              </Button>
-              <Button
-                type="button"
-                className={theme === 'dark' ? 'active' : ''}
-                onClick={() => setTheme('dark')}
-              >
-                Dark
-              </Button>
-            </ButtonGroup>
-          </div>
-        </div>
         {storageContext ? (
           <div className="graphiql-dialog-section">
             <div>

@@ -2,7 +2,7 @@
 
 /* Popup styles */
 .CodeMirror-hints {
-  background: hsl(var(--color-base));
+  background-color: #0F0822;
   border: var(--popover-border);
   border-radius: var(--border-radius-8);
   box-shadow: var(--popover-box-shadow);
@@ -29,7 +29,7 @@
   }
 }
 li.CodeMirror-hint-active {
-  background: hsla(var(--color-primary), var(--alpha-background-medium));
+  background-color: #26174d;
   color: hsl(var(--color-primary));
 }
 

@@ -8,8 +8,13 @@
 /**
  * GraphiQL
  */
-
+import TagManager from 'react-gtm-module';
 export { GraphiQLProvider } from '@graphiql/react';
+
+const tagManagerArgs = {
+  gtmId: process.env.REACT_APP_TAG_MANAGER_TOKEN!
+}
+TagManager.initialize(tagManagerArgs)
 
 /**
  * Definitions

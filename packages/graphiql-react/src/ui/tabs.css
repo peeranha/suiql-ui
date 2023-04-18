@@ -30,7 +30,7 @@
 }
 
 button.graphiql-tab-button {
-  padding: var(--px-4) 0 var(--px-4) var(--px-8);
+  padding: 5px;
 }
 
 button.graphiql-tab-close {

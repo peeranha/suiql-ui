@@ -4,6 +4,7 @@ import '../style/codemirror.css';
 import '../style/fold.css';
 import '../style/info.css';
 import '../style/editor.css';
+import '../style/scrollbar.css';
 
 export function ResponseEditor(props: UseResponseEditorArgs) {
   const ref = useResponseEditor(props, ResponseEditor);

@@ -70,6 +70,7 @@ export function useResponseEditor(
         import('codemirror/addon/search/search'),
         import('codemirror/addon/search/searchcursor'),
         import('codemirror/addon/search/jump-to-line'),
+        import('codemirror/addon/scroll/simplescrollbars'),
         // @ts-expect-error
         import('codemirror/keymap/sublime'),
         import('codemirror-graphql/esm/results/mode'),
@@ -123,6 +124,7 @@ export function useResponseEditor(
         readOnly: true,
         theme: editorTheme,
         mode: 'graphql-results',
+        scrollbarStyle: 'overlay',
         foldGutter: true,
         gutters: ['CodeMirror-foldgutter'],
         // @ts-expect-error

@@ -80,6 +80,7 @@ export function useVariableEditor(
         tabSize: 2,
         mode: 'graphql-variables',
         theme: editorTheme,
+        scrollbarStyle: 'overlay',
         autoCloseBrackets: true,
         matchBrackets: true,
         showCursorWhenSelecting: true,

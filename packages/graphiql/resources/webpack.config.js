@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const DotenvPlugin = require('dotenv-webpack');
 const graphql = require('graphql');
 const rimraf = require('rimraf');
 
@@ -61,6 +62,10 @@ const resultConfig = {
         exclude: /\.(d\.ts|d\.ts\.map|spec\.tsx)$/,
       },
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
         test: /\.css$/,
         use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader'],
       },
@@ -79,7 +84,7 @@ const resultConfig = {
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
-
+    new DotenvPlugin(),
     new HtmlWebpackPlugin({
       template: relPath('index.html.ejs'),
       inject: 'head',

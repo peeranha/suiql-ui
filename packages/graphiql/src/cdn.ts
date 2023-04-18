@@ -8,6 +8,7 @@ import * as GraphiQLReact from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import * as GraphQL from 'graphql';
 import { GraphiQL } from './components/GraphiQL';
+import GraphiQLWithExplorer from './WithExplorer';
 
 import '@graphiql/react/font/roboto.css';
 import '@graphiql/react/font/fira-code.css';
@@ -39,5 +40,8 @@ GraphiQL.GraphQL = GraphQL;
  */
 // @ts-expect-error
 GraphiQL.React = GraphiQLReact;
+
+// @ts-expect-error
+GraphiQL.GraphiQLWithExplorer = GraphiQLWithExplorer;
 
 export default GraphiQL;

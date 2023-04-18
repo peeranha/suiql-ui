@@ -51,6 +51,8 @@ export function ExecuteButton() {
                 ) {
                   setOperationName(selectedOperationName);
                 }
+                // @ts-expect-error
+                window.dataLayer.push({ 'event': 'runQuery' })
                 run();
               }}
             >
@@ -65,6 +67,8 @@ export function ExecuteButton() {
       <button
         {...buttonProps}
         onClick={() => {
+          // @ts-expect-error
+          window.dataLayer.push({ 'event': 'runQuery' })
           if (isRunning) {
             stop();
           } else {

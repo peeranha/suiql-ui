@@ -1,7 +1,7 @@
 @import url('@reach/tooltip/styles.css');
 
 [data-reach-tooltip] {
-  background: hsl(var(--color-base));
+  background: #100D1C;
   border: var(--popover-border);
   border-radius: var(--border-radius-4);
   box-shadow: var(--popover-box-shadow);

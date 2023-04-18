@@ -9,6 +9,7 @@ import '../style/fold.css';
 import '../style/lint.css';
 import '../style/hint.css';
 import '../style/editor.css';
+import '../style/scrollbar.css';
 
 type VariableEditorProps = UseVariableEditorArgs & {
   /**
