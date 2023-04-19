@@ -36,10 +36,12 @@
 }
 
 .graphiql-explorer-root > div:first-child::-webkit-scrollbar {
-  background-color: hsl(var(--color-base));
+  background-color: #090218;
+  width: 5px;
+  height: 5px;
 }
 .graphiql-explorer-root > div:first-child::-webkit-scrollbar-thumb {
-  background-color: #181327;
+  background-color: #332b52;
 }
 
 .graphiql-explorer-root > div:first-child > div {
@@ -47,14 +49,17 @@
 }
 
 .graphiql-explorer-root input {
-  background: hsl(var(--color-base));
+  background-color: #181327;
+  border: 1px solid #332b52 !important;
+  outline: none !important;
+  border-radius: 10px;
   padding: 5px 10px;
   min-width: 100px !important;
 }
 
 .graphiql-explorer-root select {
-  background-color: hsl(var(--color-base));
-  border: 1px solid hsla(var(--color-neutral), var(--alpha-secondary));
+  background-color: #181327;
+  border: 1px solid #332b52;
   border-radius: var(--border-radius-4);
   color: hsl(var(--color-neutral));
   margin: 0 var(--px-4);
