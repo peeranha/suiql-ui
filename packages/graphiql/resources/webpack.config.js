@@ -20,7 +20,7 @@ const resultConfig = {
   entry: './cdn.ts',
   context: rootPath('src'),
   output: {
-    path: rootPath(),
+    path: rootPath('build'),
     library: 'GraphiQL',
     libraryTarget: 'window',
     libraryExport: 'default',
