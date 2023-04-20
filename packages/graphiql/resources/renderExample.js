@@ -67,6 +67,7 @@ function updateURL() {
   history.replaceState(null, null, newSearch);
 }
 
+/*
 function getSchemaUrl() {
   const isDev = window.location.hostname.match(/localhost$/);
 
@@ -85,6 +86,7 @@ function getSchemaUrl() {
   }
   return '/.netlify/functions/schema-demo';
 }
+*/
 
 // Render <GraphiQL /> into the body.
 // See the README in the top level of this module to learn more about
@@ -93,7 +95,7 @@ function getSchemaUrl() {
 ReactDOM.render(
   React.createElement(GraphiQL.GraphiQLWithExplorer, {
     fetcher: GraphiQL.createFetcher({
-      url: getSchemaUrl(),
+      url: 'https://testnet-api.suiql.com/graphql',
       subscriptionUrl: 'ws://localhost:8081/subscriptions',
     }),
     query: parameters.query,

@@ -4,6 +4,8 @@
  *  This source code is licensed under the MIT license found in the
  *  LICENSE file in the root directory of this source tree.
  */
+import React from 'react';
+import ReactDOM from 'react-dom'
 import * as GraphiQLReact from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import * as GraphQL from 'graphql';
@@ -43,5 +45,84 @@ GraphiQL.React = GraphiQLReact;
 
 // @ts-expect-error
 GraphiQL.GraphiQLWithExplorer = GraphiQLWithExplorer;
+
+// Parse the search string to get url parameters.
+const parameters: any = {};
+window.location.search
+    .slice(1)
+    .split('&')
+    .forEach(function (entry) {
+        const eq = entry.indexOf('=');
+        if (eq >= 0) {
+            parameters[decodeURIComponent(entry.slice(0, eq))] = decodeURIComponent(
+                entry.slice(eq + 1),
+            );
+        }
+    });
+
+// When the query and variables string is edited, update the URL bar so
+// that it can be easily shared.
+function onEditQuery(newQuery: any) {
+    parameters.query = newQuery;
+    updateURL();
+}
+
+function onEditVariables(newVariables: any) {
+    parameters.variables = newVariables;
+    updateURL();
+}
+
+function onEditHeaders(newHeaders: any) {
+    parameters.headers = newHeaders;
+    updateURL();
+}
+
+function onTabChange(tabsState: any) {
+    const activeTab = tabsState.tabs[tabsState.activeTabIndex];
+    parameters.query = activeTab.query;
+    parameters.variables = activeTab.variables;
+    parameters.headers = activeTab.headers;
+    updateURL();
+}
+
+function updateURL() {
+    const newSearch =
+        '?' +
+        Object.keys(parameters)
+            .filter(function (key) {
+                return Boolean(parameters[key]);
+            })
+            .map(function (key) {
+                return (
+                    encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
+                );
+            })
+            .join('&');
+    history.replaceState(null, 'null', newSearch);
+}
+
+ReactDOM.render(
+    // @ts-expect-error
+    React.createElement(GraphiQL.GraphiQLWithExplorer, {
+        // @ts-expect-error
+        fetcher: GraphiQL.createFetcher({
+            url: 'https://testnet-api.suiql.com/graphql',
+            subscriptionUrl: 'ws://localhost:8081/subscriptions',
+        }),
+        query: parameters.query,
+        variables: parameters.variables,
+        headers: parameters.headers,
+        defaultHeaders: parameters.defaultHeaders,
+        onEditQuery,
+        onEditVariables,
+        onEditHeaders,
+        defaultEditorToolsVisibility: true,
+        isHeadersEditorEnabled: false,
+        shouldPersistHeaders: true,
+        inputValueDeprecation: true,
+        onTabChange,
+    }),
+    document.getElementById('graphiql'),
+);
 
 export default GraphiQL;

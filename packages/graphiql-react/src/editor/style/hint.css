@@ -14,6 +14,15 @@
   max-height: 264px;
   padding: 0;
 }
+.CodeMirror-hints::-webkit-scrollbar {
+  background-color: #090218;
+  width: 10px;
+  height: 10px;
+}
+
+.CodeMirror-hints::-webkit-scrollbar-thumb {
+  background-color: #332b52;
+}
 
 /* Autocomplete items */
 .CodeMirror-hint {
@@ -43,6 +52,16 @@ li.CodeMirror-hint-active {
   max-height: 264px;
   overflow: auto;
   padding: var(--px-12);
+  width: 350px;
+}
+.CodeMirror-hint-information::-webkit-scrollbar {
+  background-color: #090218;
+  width: 10px;
+  height: 10px;
+}
+
+.CodeMirror-hint-information::-webkit-scrollbar-thumb {
+  background-color: #332b52;
 }
 .CodeMirror-hint-information-header {
   display: flex;

@@ -4,7 +4,7 @@ cdn/
 webpack/
 monaco/
 cdn.html
-analyzer.html
+build/
 /graphiql.*js
 /graphiql.*js.map
 /graphiql.*css

@@ -1,6 +1,6 @@
 /* Popup styles */
 .CodeMirror-info {
-  background-color: hsl(var(--color-base));
+  background-color: #0F0822;
   border: var(--popover-border);
   border-radius: var(--border-radius-8);
   box-shadow: var(--popover-box-shadow);

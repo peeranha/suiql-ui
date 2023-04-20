@@ -489,7 +489,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                         <div className="header-controls-dropdown">
                           <select name="network-select" placeholder="Network">
                             <option value="testnet" defaultChecked>Testnet</option>
-                            <option value="mainnet">Mainnet</option>
+                            <option value="mainnet" disabled>Mainnet</option>
                           </select>
                         </div>
                         <ExecuteButton />
