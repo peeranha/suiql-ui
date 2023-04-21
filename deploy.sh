@@ -1,7 +1,8 @@
 bucket="suiql.com"
 
+cd ./packages/graphiql
 rm -rf ./build
-yarn run build
+yarn run build-bundles
 
 if [ ! -d "./build" ];
 then
