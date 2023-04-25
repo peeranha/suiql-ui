@@ -71,7 +71,7 @@
       }
 
       &:focus {
-        outline: hsl(var(--color-primary)) auto 1px;
+         outline: #332b52 auto 1px;
       }
 
       & > svg {
