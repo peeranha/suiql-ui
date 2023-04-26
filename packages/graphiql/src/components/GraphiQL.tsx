@@ -722,7 +722,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
           <a href="https://peeranha.io" target="_blank"><img src={peeranhaImg} alt="peeranhaImg"/></a>
         </div>
         <div className="footer-socials">
-          <a href="https://discord.gg/jmrbqVnzMZ" target="_blank"><img src={discordImg} alt="discordImg"/></a>
+          <a href="https://discord.gg/dQCkxUN74W" target="_blank"><img src={discordImg} alt="discordImg"/></a>
           <a href="https://twitter.com/Sui_QL" target="_blank"><img src={twitterImg} alt="twitterImg"/></a>
         </div>
       </div>
