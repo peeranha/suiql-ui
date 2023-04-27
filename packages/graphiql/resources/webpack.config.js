@@ -90,6 +90,7 @@ const resultConfig = {
       inject: 'head',
       filename: isDev && !isHMR ? 'dev.html' : 'index.html',
       graphqlVersion: JSON.stringify(graphql.version),
+      favicon: '../resources/favicon.png',
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
