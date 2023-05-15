@@ -244,7 +244,7 @@ button.graphiql-tab-add > svg {
 .graphiql-container .graphiql-session {
   display: flex;
   flex: 1;
-  max-height: 60vh;
+  min-height: 20vh;
   margin-top: 10px;
 }
 
@@ -438,7 +438,7 @@ button.graphiql-tab-add > svg {
   justify-content: space-between;
   align-items: flex-end;
   color: rgba(154, 151, 174, 1);
-  margin-top: 70px;
+  margin-top: 20px;
   padding: 20px;
   font-size: 14px;
   border-top: 1px solid rgba(39, 33, 56, 1);
