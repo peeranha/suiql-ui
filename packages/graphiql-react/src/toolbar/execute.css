@@ -11,16 +11,8 @@ button.graphiql-execute-button {
   padding: 0;
   width: var(--toolbar-width);
 
-  &:hover {
-    background-color: hsla(var(--color-primary), 0.9);
-  }
-
-  &:active {
-    background-color: hsla(var(--color-primary), 0.8);
-  }
-
   &:focus {
-    outline: hsla(var(--color-primary), 0.8) auto 1px;
+     outline: #332b52 auto 1px;
   }
 
   & > svg {

@@ -24,7 +24,7 @@
   }
 
   &.graphiql-tab-active {
-    background-color: hsla(var(--color-neutral), var(--alpha-background-heavy));
+    background: rgba(89, 91, 212, 0.5);
     color: hsla(var(--color-neutral), 1);
   }
 }

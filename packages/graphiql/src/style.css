@@ -1,6 +1,5 @@
 /* Everything */
 .graphiql-container {
-  background-color: rgba(9, 2, 24, 0.5);
   display: flex;
   height: 100%;
   margin: 0;
@@ -54,8 +53,8 @@
   align-items: center;
   justify-content: center;
   color: hsla(var(--color-neutral), var(--alpha-secondary));
-  height: calc(var(--sidebar-width) - (2 * var(--px-8)));
-  width: calc(var(--sidebar-width) - (2 * var(--px-8)));
+  height: calc(60px - (2 * var(--px-8)));
+  width: calc(60px - (2 * var(--px-8)));
 }
 
 .graphiql-container .graphiql-sidebar button.active {
@@ -71,9 +70,16 @@
 
 /* The main content, i.e. everything except the sidebar */
 .graphiql-container .graphiql-main {
+  background: linear-gradient(0deg, rgba(9, 2, 24, 0.5), rgba(9, 2, 24, 0.5)),
+  linear-gradient(0deg, rgba(48, 43, 65, 0.5), rgba(48, 43, 65, 0.5));
+  border: 1px solid #302B41;
+  box-shadow: 0 4px 15px 0 rgba(89, 91, 212, 0.2);
+  margin: 10px 0;
+  border-radius: 22px;
   display: flex;
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 /* The current session and tabs */
@@ -86,9 +92,7 @@
   flex: 1;
   max-height: 100%;
   margin: var(--px-16);
-  margin-left: 0;
   min-width: 0;
-  box-shadow: -10px 5px 15px rgba(89, 91, 212, 0.2), 10px 5px 15px rgba(89, 91, 212, 0.2);
 }
 
 /* The session header containing tabs and the logo */
@@ -97,6 +101,10 @@
   display: flex;
   justify-content: space-between;
   height: var(--session-header-height);
+}
+
+.graphiql-session-header .graphiql-tabs {
+  padding-top: 0;
 }
 
 .graphiql-session-header .graphiql-tabs::-webkit-scrollbar {
@@ -142,7 +150,7 @@
   width: 40%;
   height: 90px;
   background: linear-gradient(93.48deg, rgba(14, 6, 32, 0.8) 23.19%, rgba(21, 12, 48, 0.8) 68.8%),
-  linear-gradient(0deg, #272138, #272138);
+  linear-gradient(0deg, rgba(39, 33, 56, 0.8), rgba(39, 33, 56, 0.8));
   border: 1px solid #272138;
   border-radius: 22px;
   margin-right: 40px;
@@ -193,8 +201,14 @@
 
 /* The button to add a new tab */
 button.graphiql-tab-add {
-  height: 100%;
-  padding: 0 var(--px-4);
+  padding: var(--px-4);
+  border: 1px solid #231B31;
+  border-radius: 8px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 button.graphiql-tab-add > svg {
   color: hsla(var(--color-neutral), var(--alpha-secondary));
@@ -230,7 +244,7 @@ button.graphiql-tab-add > svg {
 .graphiql-container .graphiql-session {
   display: flex;
   flex: 1;
-  padding: 0 var(--px-8) var(--px-8);
+  min-height: 20vh;
   margin-top: 10px;
 }
 
@@ -332,7 +346,9 @@ button.graphiql-tab-add > svg {
   padding: var(--px-8);
 }
 .graphiql-container .graphiql-editor-tools button {
-  color: hsla(var(--color-neutral), var(--alpha-secondary));
+  font-weight: 400;
+  font-size: 16px;
+  color: #666571;
 }
 .graphiql-container .graphiql-editor-tools button.active {
   color: hsla(var(--color-neutral), 1);
@@ -422,9 +438,11 @@ button.graphiql-tab-add > svg {
   justify-content: space-between;
   align-items: flex-end;
   color: rgba(154, 151, 174, 1);
-  margin-top: 70px;
+  margin-top: 20px;
   padding: 20px;
   font-size: 14px;
+  border-top: 1px solid rgba(39, 33, 56, 1);
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .graphiql-footer .footer-madeBy {
   margin-right: 20%;
@@ -442,9 +460,13 @@ button.graphiql-tab-add > svg {
   align-items: flex-end;
 }
 
+.graphiql-footer .footer-socials > a {
+  margin-right: 10px;
+}
+
 /* The plugin container */
 .graphiql-container .graphiql-plugin {
-  height: 60vh;
+  height: 100%;
   background-color: #0F0822;
   border-radius: calc(var(--border-radius-12));
   box-shadow: var(--popover-box-shadow);
@@ -458,6 +480,7 @@ button.graphiql-tab-add > svg {
 .graphiql-container .graphiql-plugin::-webkit-scrollbar {
   background-color: #0F0822;
   width: 5px;
+  height: 5px;
 }
 
 .graphiql-container .graphiql-plugin::-webkit-scrollbar-thumb {
