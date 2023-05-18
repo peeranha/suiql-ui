@@ -432,7 +432,7 @@ button.graphiql-tab-add > svg {
 /* The footer below the response view */
 .root .graphiql-footer {
   width: 100%;
-  height: 40px;
+  height: 60px;
   background: radial-gradient(278.12% 1089.85% at 50% 50%, #090218 0%, #0B051D 100%);
   display: flex;
   justify-content: space-between;
@@ -444,24 +444,47 @@ button.graphiql-tab-add > svg {
   border-top: 1px solid rgba(39, 33, 56, 1);
   font-family: 'Source Sans Pro', sans-serif;
 }
-.graphiql-footer .footer-madeBy {
-  margin-right: 20%;
+
+.graphiql-footer-right {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  margin-right: 50px;
 }
 
-.graphiql-footer .footer-policy a {
+.footer-madeBy {
+  display: flex;
+  margin-top: 10px;
+}
+
+.footer-aboutUs {
+  display: block;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-policy a {
   color: #9A97AE;
 }
 
-.graphiql-footer .footer-socials {
-  margin-right: 40px;
+.footer-socials {
   display: flex;
   align-items: flex-end;
 }
 
-.graphiql-footer .footer-socials > a {
-  margin-right: 10px;
+.footer-socials > a {
+  margin-left: 10px;
+}
+
+.footer-socials > a > img {
+  width: 22px;
 }
 
 /* The plugin container */
