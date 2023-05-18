@@ -430,7 +430,7 @@ button.graphiql-tab-add > svg {
 }
 
 /* The footer below the response view */
-.root .graphiql-footer {
+.graphiql-footer {
   width: 100%;
   height: 60px;
   background: radial-gradient(278.12% 1089.85% at 50% 50%, #090218 0%, #0B051D 100%);
@@ -468,6 +468,7 @@ button.graphiql-tab-add > svg {
   color: #fff;
   margin-bottom: 10px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .footer-policy a {

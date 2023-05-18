@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 45px;
+}
+
+.sectionLabel {
+  padding: 6px 24px;
+  width: fit-content;
+  color: #C0BACF;
+  font-weight: 400;
+  font-size: 16px;
+  background: rgba(9, 3, 25, 0.8);
+  border-radius: 14px;
+}
+
+.sectionTitle {
+  font-weight: 400;
+  font-size: 32px;
+  color: #FFFFFF;
+}
+
+.sectionParagraph {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #C0BACF;
+  margin: 0;
+}
