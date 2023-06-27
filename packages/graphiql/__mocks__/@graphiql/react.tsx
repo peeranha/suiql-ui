@@ -248,17 +248,20 @@ export const useVariableEditor: typeof _useVariableEditor =
 
 export const HeaderEditor: typeof _HeaderEditor = function HeaderEditor(props) {
   const ref = useHeaderEditor(props);
+  // @ts-ignore
   return <div ref={ref} />;
 };
 
 export const QueryEditor: typeof _QueryEditor = function QueryEditor(props) {
   const ref = useQueryEditor(props);
+  // @ts-ignore
   return <div data-testid="query-editor" ref={ref} />;
 };
 
 export const ResponseEditor: typeof _ResponseEditor =
   function ResponseEditor() {
     const ref = useResponseEditor();
+    // @ts-ignore
     return <div ref={ref} />;
   };
 
@@ -266,5 +269,6 @@ export const VariableEditor: typeof _VariableEditor = function VariableEditor(
   props,
 ) {
   const ref = useVariableEditor(props);
+  // @ts-ignore
   return <div ref={ref} />;
 };

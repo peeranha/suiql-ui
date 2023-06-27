@@ -119,14 +119,4 @@ const resultConfig = {
   },
 };
 
-if (process.env.ANALYZE) {
-  resultConfig.plugins.push(
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: rootPath('analyzer.html'),
-    }),
-  );
-}
-
 module.exports = resultConfig;
