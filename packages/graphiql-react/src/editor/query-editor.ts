@@ -143,6 +143,7 @@ export function useQueryEditor(
     importCodeMirror([
       import('codemirror/addon/comment/comment'),
       import('codemirror/addon/search/search'),
+      import('codemirror/addon/scroll/simplescrollbars'),
       import('codemirror-graphql/esm/hint'),
       import('codemirror-graphql/esm/lint'),
       import('codemirror-graphql/esm/info'),
@@ -168,6 +169,7 @@ export function useQueryEditor(
         foldGutter: true,
         mode: 'graphql',
         theme: editorTheme,
+        scrollbarStyle: 'overlay',
         autoCloseBrackets: true,
         matchBrackets: true,
         showCursorWhenSelecting: true,

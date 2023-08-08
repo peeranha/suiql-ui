@@ -2,7 +2,7 @@
 
 /* Popup styles */
 .CodeMirror-hints {
-  background: hsl(var(--color-base));
+  background-color: #0F0822;
   border: var(--popover-border);
   border-radius: var(--border-radius-8);
   box-shadow: var(--popover-box-shadow);
@@ -13,6 +13,15 @@
   /* By default this is equals exactly 8 items including margins */
   max-height: 264px;
   padding: 0;
+}
+.CodeMirror-hints::-webkit-scrollbar {
+  background-color: #090218;
+  width: 10px;
+  height: 10px;
+}
+
+.CodeMirror-hints::-webkit-scrollbar-thumb {
+  background-color: #332b52;
 }
 
 /* Autocomplete items */
@@ -29,7 +38,7 @@
   }
 }
 li.CodeMirror-hint-active {
-  background: hsla(var(--color-primary), var(--alpha-background-medium));
+  background-color: #26174d;
   color: hsl(var(--color-primary));
 }
 
@@ -43,6 +52,16 @@ li.CodeMirror-hint-active {
   max-height: 264px;
   overflow: auto;
   padding: var(--px-12);
+  width: 350px;
+}
+.CodeMirror-hint-information::-webkit-scrollbar {
+  background-color: #090218;
+  width: 10px;
+  height: 10px;
+}
+
+.CodeMirror-hint-information::-webkit-scrollbar-thumb {
+  background-color: #332b52;
 }
 .CodeMirror-hint-information-header {
   display: flex;

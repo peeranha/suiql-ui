@@ -6,6 +6,7 @@ button.graphiql-un-styled {
 
   &:hover {
     background-color: hsla(var(--color-neutral), var(--alpha-background-light));
+    filter: brightness(150%);
   }
 
   &:active {
@@ -16,7 +17,7 @@ button.graphiql-un-styled {
   }
 
   &:focus {
-    outline: hsla(var(--color-neutral), var(--alpha-background-heavy)) auto 1px;
+    filter: brightness(190%);
   }
 }
 

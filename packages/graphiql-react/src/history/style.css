@@ -1,6 +1,19 @@
 .graphiql-history-header {
   font-size: var(--font-size-h2);
   font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  height: 40px;
+  & span {
+      font-weight: 600;
+      font-size: 18px !important;
+      color: #FFFFFF;
+      margin-left: 10px;
+    }
+  & svg {
+      height: 30px;
+      width: 30px;
+    }
 }
 
 .graphiql-history-items {
@@ -58,7 +71,7 @@
       }
 
       &:focus {
-        outline: hsl(var(--color-primary)) auto 1px;
+         outline: #332b52 auto 1px;
       }
 
       & > svg {

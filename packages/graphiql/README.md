@@ -102,18 +102,18 @@ The following is everything you need to render GraphiQL in your React
 application:
 
 ```jsx
-import { createGraphiQLFetcher } from '@graphiql/toolkit';
-import { GraphiQL } from 'graphiql';
+import {createGraphiQLFetcher} from '@graphiql/toolkit';
+import {GraphiQL} from 'graphiql/build/graphiql';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'graphiql/graphiql.css';
 
-const fetcher = createGraphiQLFetcher({ url: 'https://my.backend/graphql' });
+const fetcher = createGraphiQLFetcher({url: 'https://my.backend/graphql'});
 
 ReactDOM.render(
-  <GraphiQL fetcher={fetcher} />,
-  document.getElementById('root'),
+    <GraphiQL fetcher={fetcher}/>,
+    document.getElementById('root'),
 );
 ```
 

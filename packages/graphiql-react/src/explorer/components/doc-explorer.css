@@ -2,7 +2,9 @@
 .graphiql-doc-explorer-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
+  height: 40px;
 
   &:focus-within {
     & .graphiql-doc-explorer-title {
@@ -24,6 +26,23 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+}
+
+.graphiql-doc-explorer-title-wrapper {
+  display: flex;
+  align-items: center;
+
+  & .graphiql-doc-explorer-title {
+     font-weight: 600;
+     font-size: 18px !important;
+     color: #FFFFFF;
+     margin-left: 10px;
+     padding-bottom: 5px;
+   }
+  & svg {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 /* The search input in the header of the doc explorer */

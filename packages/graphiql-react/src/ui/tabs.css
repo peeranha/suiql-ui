@@ -24,13 +24,13 @@
   }
 
   &.graphiql-tab-active {
-    background-color: hsla(var(--color-neutral), var(--alpha-background-heavy));
+    background: rgba(89, 91, 212, 0.5);
     color: hsla(var(--color-neutral), 1);
   }
 }
 
 button.graphiql-tab-button {
-  padding: var(--px-4) 0 var(--px-4) var(--px-8);
+  padding: 5px;
 }
 
 button.graphiql-tab-close {
